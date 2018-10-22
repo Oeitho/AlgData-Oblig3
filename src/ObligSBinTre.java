@@ -3,6 +3,7 @@ import java.util.*;
 public class ObligSBinTre<T> implements Beholder<T> {
     
     private static final class Node<T> { // en indre nodeklasse
+        
         private T verdi; // nodens verdi
         private Node<T> venstre, høyre; // venstre og høyre barn
         private Node<T> forelder; // forelder
@@ -20,22 +21,42 @@ public class ObligSBinTre<T> implements Beholder<T> {
         
         @Override
         public String toString(){ return "" + verdi;}
+        
         } // class Node
     
     private Node<T> rot; // peker til rotnoden
     private int antall; // antall noder
     private int endringer; // antall endringer
-    private final Comparator<? super T> comp; // komparator
+    private final Comparator<? super T> comparator; // komparator
     
     public ObligSBinTre(Comparator<? super T> c){
         rot = null;
         antall = 0;
-        comp = c;
+        comparator = c;
     }
 
     @Override
     public boolean leggInn(T verdi) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        Objects.requireNonNull(verdi, "Verdi som legges inn må ikke være null");
+        
+        Node<T> currentNode = rot;
+        Node<T> parentNode = null;
+        int comparison = 0;
+        
+        while (currentNode != null) {
+            parentNode = currentNode;
+            comparison = comparator.compare(verdi, currentNode.verdi);
+            currentNode = comparison < 0 ? currentNode.venstre : currentNode.høyre;
+        }
+        
+        currentNode = new Node<>(verdi, parentNode);
+        
+        if (parentNode == null) rot = currentNode;
+        else if (comparison < 0) parentNode.venstre = currentNode;
+        else parentNode.høyre = currentNode;
+        
+        antall++;
+        return true;
     }
 
     @Override
@@ -43,7 +64,7 @@ public class ObligSBinTre<T> implements Beholder<T> {
         if (verdi == null) return false;
         Node<T> p = rot;
         while (p != null) {
-            int cmp = comp.compare(verdi, p.verdi);
+            int cmp = comparator.compare(verdi, p.verdi);
             if (cmp < 0) p = p.venstre;
             else if (cmp > 0) p = p.høyre;
             else return true;
@@ -118,6 +139,7 @@ public class ObligSBinTre<T> implements Beholder<T> {
     }
 
     private class BladnodeIterator implements Iterator<T> {
+        
         private Node<T> p = rot, q = null;
         private boolean removeOK = false;
         private int iteratorendringer = endringer;
@@ -140,5 +162,6 @@ public class ObligSBinTre<T> implements Beholder<T> {
         public void remove() {
             throw new UnsupportedOperationException("Ikke kodet ennå!");
         }
+        
     } // BladnodeIterator
 } // ObligSBinTre
