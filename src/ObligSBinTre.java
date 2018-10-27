@@ -129,14 +129,13 @@ public class ObligSBinTre<T> implements Beholder<T> {
     }
 
     public String toString() {
+        if (rot == null) return "[]";
         StringJoiner strengKobler = new StringJoiner(", ", "[", "]");
         Node<T> currentNode = rot;
-        if (rot != null) {            
-            while (currentNode.venstre != null) currentNode = currentNode.venstre;
-            while (currentNode != null) {
-                strengKobler.add(currentNode.toString());
-                currentNode = nesteInorden(currentNode);
-            }
+        while (currentNode.venstre != null) currentNode = currentNode.venstre;
+        while (currentNode != null) {
+            strengKobler.add(currentNode.toString());
+            currentNode = nesteInorden(currentNode);
         }
         return strengKobler.toString();
     }
