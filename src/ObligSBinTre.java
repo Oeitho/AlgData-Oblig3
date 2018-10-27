@@ -87,7 +87,19 @@ public class ObligSBinTre<T> implements Beholder<T> {
     }
 
     public int antall(T verdi) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        if (verdi == null)
+            return 0;
+        
+        Node<T> currentNode = rot;
+        
+        int count = 0;
+        while (currentNode != null) {
+            int comparison = comparator.compare(verdi, currentNode.verdi);
+            currentNode = comparison < 0 ? currentNode.venstre : currentNode.høyre;
+            if (comparison == 0) count++; 
+        }
+        
+        return count;
     }
 
     @Override
