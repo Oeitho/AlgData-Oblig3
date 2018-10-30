@@ -307,11 +307,47 @@ public class ObligSBinTre<T> implements Beholder<T> {
     }
 
     public String høyreGren() {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        if (tom()) return "[]";
+        
+        StringJoiner strengKobler = new StringJoiner(", ", "[", "]");
+        
+        Node<T> currentNode = rot;
+        while (currentNode != null) {
+            strengKobler.add(currentNode.toString());
+            if (currentNode.høyre != null) currentNode = currentNode.høyre;
+            else currentNode = currentNode.venstre;
+        }
+        
+        return strengKobler.toString();
     }
 
     public String lengstGren() {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        if (tom()) return "[]";
+        
+        StringJoiner strengKobler = new StringJoiner(", ", "[", "]");
+        
+        Stack<Node<T>> lengsteGren = lengsteGren(rot);
+        
+        while (!lengsteGren.isEmpty()) {
+            strengKobler.add(lengsteGren.pop().toString());
+        }
+        
+        return strengKobler.toString();
+    }
+    
+    public Stack<Node<T>> lengsteGren(Node<T> currentNode) {
+        if (currentNode == null) return new Stack<>();
+        
+        Stack<Node<T>> lengsteGren = new Stack<>();        
+        
+        Stack<Node<T>> høyreGren = lengsteGren(currentNode.høyre);
+        Stack<Node<T>> venstreGren = lengsteGren(currentNode.venstre);
+        
+        lengsteGren = høyreGren.size() > venstreGren.size() ? høyreGren : venstreGren;
+        
+        lengsteGren.push(currentNode);
+        
+        return lengsteGren;
     }
 
     public String[] grener() {
