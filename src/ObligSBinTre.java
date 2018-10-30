@@ -56,6 +56,7 @@ public class ObligSBinTre<T> implements Beholder<T> {
         else parentNode.høyre = currentNode;
         
         antall++;
+        endringer++;
         return true;
     }
 
@@ -74,11 +75,136 @@ public class ObligSBinTre<T> implements Beholder<T> {
 
     @Override
     public boolean fjern(T verdi) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        if (verdi == null) return false;
+        
+        Node<T> currentNode = rot;
+        Node<T> parentNode = null;
+        
+        while (currentNode != null) {
+            int comparison = comparator.compare(verdi, currentNode.verdi);
+            if (comparison < 0) {
+                parentNode = currentNode;
+                currentNode = currentNode.venstre;
+            }
+            else if (comparison > 0) {
+                parentNode = currentNode;
+                currentNode = currentNode.høyre;
+            }
+            else break;
+        }
+        
+        if (currentNode == null) return false;
+        
+        if (currentNode.venstre == null || currentNode.høyre == null) {
+            Node<T> childrenNode = currentNode.venstre != null ? currentNode.venstre : currentNode.høyre;
+            if (currentNode == rot) {
+                rot = childrenNode;
+                if (childrenNode != null) childrenNode.forelder = null;
+            } else if (currentNode == parentNode.venstre) {
+                parentNode.venstre = childrenNode;
+                if (childrenNode != null) childrenNode.forelder = parentNode;
+            } else {
+                parentNode.høyre = childrenNode;
+                if (childrenNode != null) childrenNode.forelder = parentNode;
+            }
+        } else {
+            Node<T> parentToNextInorden = currentNode;
+            Node<T> nextInorden = currentNode.høyre;
+            
+            while (nextInorden.venstre != null) {
+                parentToNextInorden = nextInorden;
+                nextInorden = nextInorden.venstre;
+            }
+            
+            currentNode.verdi = nextInorden.verdi;
+            if (parentToNextInorden != currentNode) {
+                parentToNextInorden.venstre = nextInorden.høyre;
+                if (nextInorden.høyre != null) nextInorden.høyre.forelder = nextInorden.forelder;
+            } else {
+                parentToNextInorden.høyre = nextInorden.høyre;
+                if (nextInorden.høyre != null) nextInorden.høyre.forelder = nextInorden.forelder;
+            }
+        }
+        
+        antall--;
+        endringer++;
+        return true;
     }
 
     public int fjernAlle(T verdi) {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        if (verdi == null || tom()) return 0;
+        
+        Stack<Node<T>> sletteStakk = new Stack<>();        
+        Node<T> currentNode = rot;
+        Node<T> parentNode = null;
+        
+        while (currentNode != null) {
+            int comparison = comparator.compare(verdi, currentNode.verdi);
+            if (comparison < 0) {
+                parentNode = currentNode;
+                currentNode = currentNode.venstre;
+            } else if (comparison > 0) {
+                parentNode = currentNode;
+                currentNode = currentNode.høyre;
+            } else {
+                sletteStakk.push(currentNode);
+                sletteStakk.push(parentNode);
+                parentNode = currentNode;
+                currentNode = currentNode.høyre;
+            }
+        }
+        
+        int fjernedeElementer = sletteStakk.size() / 2;
+        
+        if (sletteStakk.isEmpty()) return 0;
+        
+        while (sletteStakk.size() > 2) {
+            parentNode = sletteStakk.pop();
+            currentNode = sletteStakk.pop();
+            
+            if (currentNode == parentNode.høyre) parentNode.høyre = currentNode.høyre;
+            else parentNode.venstre = currentNode.høyre;
+            if (currentNode.høyre != null) currentNode.høyre.forelder = parentNode;
+        }
+        
+        parentNode = sletteStakk.pop();
+        currentNode = sletteStakk.pop();
+        
+        if (currentNode.venstre == null || currentNode.høyre == null) {
+            Node<T> childrenNode = currentNode.venstre != null ? currentNode.venstre : currentNode.høyre;
+            if (currentNode == rot) {
+                rot = childrenNode;
+                if (childrenNode != null) childrenNode.forelder = null;
+            } else if (currentNode == parentNode.venstre) {
+                parentNode.venstre = childrenNode;
+                if (childrenNode != null) childrenNode.forelder = parentNode;
+            } else {
+                parentNode.høyre = childrenNode;
+                if (childrenNode != null) childrenNode.forelder = parentNode;
+            }
+        } else {
+            Node<T> parentToNextInorden = currentNode;
+            Node<T> nextInorden = currentNode.høyre;
+            
+            while (nextInorden.venstre != null) {
+                parentToNextInorden = nextInorden;
+                nextInorden = nextInorden.venstre;
+            }
+            
+            currentNode.verdi = nextInorden.verdi;
+            if (parentToNextInorden != currentNode) {
+                parentToNextInorden.venstre = nextInorden.høyre;
+                if (nextInorden.høyre != null) nextInorden.høyre.forelder = nextInorden.forelder;
+            } else {
+                parentToNextInorden.høyre = nextInorden.høyre;
+                if (nextInorden.høyre != null) nextInorden.høyre.forelder = nextInorden.forelder;
+            }
+        }
+        
+        antall -= fjernedeElementer;
+        endringer++;
+        
+        return fjernedeElementer;
     }
     
     @Override
@@ -109,7 +235,21 @@ public class ObligSBinTre<T> implements Beholder<T> {
 
     @Override
     public void nullstill() {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        if (tom()) return;
+        ArrayDeque<Node<T>> nodeKø = new ArrayDeque<>();
+        nodeKø.add(rot);
+        
+        while (!nodeKø.isEmpty()) {
+            Node<T> currentNode = nodeKø.removeFirst();
+            currentNode.forelder = null;
+            
+            if (currentNode.venstre != null) nodeKø.add(currentNode.venstre);
+            if (currentNode.høyre != null) nodeKø.add(currentNode.høyre);
+        }
+        
+        rot = null;
+        antall = 0;
+        endringer++;
     }
 
     private static <T> Node<T> nesteInorden(Node<T> p) {
