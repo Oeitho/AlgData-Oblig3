@@ -351,7 +351,39 @@ public class ObligSBinTre<T> implements Beholder<T> {
     }
 
     public String[] grener() {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        if (rot == null) return new String[0];
+        
+        String[] grener = grener(rot);
+        
+        for (int i = 0; i < grener.length; i++) {
+            grener[i] = "[" + grener[i];
+        }
+        
+        return grener;
+    }
+    
+    public String[] grener(Node<T> currentNode) {
+        if (currentNode.venstre == null && currentNode.høyre == null) {
+            return new String[] { currentNode.toString() + "]" };
+        }
+        
+        String[] venstreGren, høyreGren;
+        
+        venstreGren = currentNode.venstre != null ? grener(currentNode.venstre) : new String[0];
+        høyreGren = currentNode.høyre != null ? grener(currentNode.høyre) : new String[0];
+        
+        int antallGrener = venstreGren.length + høyreGren.length;
+        
+        String[] grener = Arrays.copyOf(venstreGren, antallGrener);
+        System.arraycopy(høyreGren, 0, grener, venstreGren.length, høyreGren.length);
+        
+        String nodeVerdi = currentNode.toString() + ", ";
+        
+        for (int i = 0; i < antallGrener; i++) {
+            grener[i] = nodeVerdi + grener[i];
+        }
+        
+        return grener;
     }
 
     public String bladnodeverdier() {
