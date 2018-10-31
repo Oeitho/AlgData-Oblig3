@@ -1,5 +1,9 @@
 import java.util.*;
 
+/*
+ * Øivind Thorrud - s315695
+ */
+
 public class ObligSBinTre<T> implements Beholder<T> {
     
     private static final class Node<T> { // en indre nodeklasse
