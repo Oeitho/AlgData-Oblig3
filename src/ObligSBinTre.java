@@ -362,7 +362,7 @@ public class ObligSBinTre<T> implements Beholder<T> {
         return grener;
     }
     
-    public String[] grener(Node<T> currentNode) {
+    private String[] grener(Node<T> currentNode) {
         if (currentNode.venstre == null && currentNode.høyre == null) {
             return new String[] { currentNode.toString() + "]" };
         }
@@ -387,11 +387,51 @@ public class ObligSBinTre<T> implements Beholder<T> {
     }
 
     public String bladnodeverdier() {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        if (tom()) return "[]";
+        StringJoiner bladnodeKobler = new StringJoiner(", ", "[", "]");
+        bladnodeverdier(rot, bladnodeKobler);
+        return bladnodeKobler.toString();
+    }
+    
+    private void bladnodeverdier(Node<T> currentNode, StringJoiner bladnodeKobler) {
+        if (currentNode.venstre == null && currentNode.høyre == null) {
+            bladnodeKobler.add(currentNode.toString());
+            return;
+        }
+        if (currentNode.venstre != null) bladnodeverdier(currentNode.venstre, bladnodeKobler);
+        if (currentNode.høyre != null) bladnodeverdier(currentNode.høyre, bladnodeKobler);
     }
 
     public String postString() {
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        if (tom()) return "[]";
+        
+        Stack<Node<T>> stakk = new Stack<>();
+        Node<T> currentNode = rot;
+        StringJoiner strengKobler = new StringJoiner(", ", "[", "]");
+        
+        while (currentNode.venstre != null || currentNode.høyre != null) {
+            stakk.push(currentNode);
+            if (currentNode.venstre != null) currentNode = currentNode.venstre;
+            else currentNode = currentNode.høyre;
+        }
+        
+        while (true) {
+            strengKobler.add(currentNode.toString());
+            if (stakk.isEmpty()) break;
+            Node<T> parentNode = stakk.peek();
+            if (currentNode == parentNode.venstre && parentNode.høyre != null) {
+                currentNode = parentNode.høyre;
+                while (currentNode.venstre != null || currentNode.høyre != null) {
+                    stakk.push(currentNode);
+                    if (currentNode.venstre != null) currentNode = currentNode.venstre;
+                    else currentNode = currentNode.høyre;
+                }
+            } else {
+                currentNode = stakk.pop();
+            }
+        }
+        
+        return strengKobler.toString();
     }
 
     @Override
