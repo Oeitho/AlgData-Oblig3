@@ -150,7 +150,7 @@ public class ObligSBinTre<T> implements Beholder<T> {
             } else if (comparison > 0) {
                 parentNode = currentNode;
                 currentNode = currentNode.høyre;
-            } else {
+            } else { //Legger til node og foreldrenode i stabel
                 sletteStakk.push(currentNode);
                 sletteStakk.push(parentNode);
                 parentNode = currentNode;
@@ -162,7 +162,7 @@ public class ObligSBinTre<T> implements Beholder<T> {
         
         if (sletteStakk.isEmpty()) return 0;
         
-        while (sletteStakk.size() > 2) {
+        while (sletteStakk.size() > 2) { //Tar noder ut av stabel og fjerner dem
             parentNode = sletteStakk.pop();
             currentNode = sletteStakk.pop();
             
@@ -170,6 +170,8 @@ public class ObligSBinTre<T> implements Beholder<T> {
             else parentNode.venstre = currentNode.høyre;
             if (currentNode.høyre != null) currentNode.høyre.forelder = parentNode;
         }
+        
+        // Spiesielt for siste node er at den kan ha venstrebarn, det behandles her
         
         parentNode = sletteStakk.pop();
         currentNode = sletteStakk.pop();

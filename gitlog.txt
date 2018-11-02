@@ -1,0 +1,164 @@
+commit 1d088d6112d93655633d8a5e060199ea808baae6
+Author: Øivind <s315695@stud.hioa.no>
+Date:   Wed Oct 31 14:47:17 2018 +0100
+
+    Added lesmeg.txt
+
+commit 2189587ac5e721ec9efb7b0600e868cbf63007e2
+Author: Øivind <s315695@stud.hioa.no>
+Date:   Wed Oct 31 14:46:51 2018 +0100
+
+    Added name and student number
+
+commit b19acc2192f5f4adfed1584f3393c4882e3b1f94
+Merge: d87a6e8 4d10b04
+Author: Øivind <s315695@stud.hioa.no>
+Date:   Wed Oct 31 14:41:09 2018 +0100
+
+    Added functionality to remove method
+
+commit 4d10b047a5ad125811f39e1c5a6f3a56fdabb517
+Author: Øivind <s315695@stud.hioa.no>
+Date:   Wed Oct 31 14:01:35 2018 +0100
+
+    Added functionality to remove method
+
+commit d87a6e88013192cf90567948d4cc3d2d2bcf20bc
+Merge: ee113ea cd2053b
+Author: Øivind <s315695@stud.hioa.no>
+Date:   Wed Oct 31 13:34:33 2018 +0100
+
+    Adds functionality to constructor and next method in BladnodeIterator
+
+commit cd2053b7a909a9983d698acc75ec407ab8cc0460
+Author: Øivind <s315695@stud.hioa.no>
+Date:   Wed Oct 31 13:33:48 2018 +0100
+
+    Adds functionality to constructor and next method in BladnodeIterator class
+
+commit ee113ea6ad8a708607a284f4f4022663cb23f6e1
+Merge: 7ecf0a4 27842f4
+Author: Øivind <s315695@stud.hioa.no>
+Date:   Wed Oct 31 02:20:12 2018 +0100
+
+    Added functionality to bladnodeverdier and poststring methods
+
+commit 27842f4bc9128ef02b96bca7e8d5e6296c0e0bd7
+Author: Øivind <s315695@stud.hioa.no>
+Date:   Wed Oct 31 02:19:49 2018 +0100
+
+    Added functionality to bladnodeverdier and poststring methods
+
+commit 7ecf0a4a606ec81a5cdef172583eb771e9cf2514
+Merge: 4c4144f 4c5fe11
+Author: Øivind <s315695@stud.hioa.no>
+Date:   Tue Oct 30 22:59:01 2018 +0100
+
+    Added functionality to grener method
+
+commit 4c5fe11088c078452903551ab1069a40de44e243
+Author: Øivind <s315695@stud.hioa.no>
+Date:   Tue Oct 30 22:58:39 2018 +0100
+
+    Added functionality to grener method
+
+commit 4c4144fd567dc666dd9e65c86f12ee6d30cb9d44
+Merge: dad69b2 86a869e
+Author: Øivind <s315695@stud.hioa.no>
+Date:   Tue Oct 30 15:15:36 2018 +0100
+
+    Added functionality to høyreGren and lengsteGren methods
+
+commit 86a869e6626d48b0b63fba62c148ec63dda3eae4
+Author: Øivind <s315695@stud.hioa.no>
+Date:   Tue Oct 30 15:15:00 2018 +0100
+
+    Added functionality to høyreGren and lengsteGren methods
+
+commit dad69b25c8b0affb952478e085f6bd3095505f11
+Merge: d354662 841f1b5
+Author: Øivind <s315695@stud.hioa.no>
+Date:   Tue Oct 30 13:17:55 2018 +0100
+
+    Added functionality to fjern, fjernAlle and nullstill methods
+
+commit 841f1b5b4bfce79c2f62a3118e2f34fa5e5d8d38
+Author: Øivind <s315695@stud.hioa.no>
+Date:   Tue Oct 30 13:17:07 2018 +0100
+
+    Added functionality to fjern, fjernAlle and nullstill methods in ObligSBinTre class
+
+commit d3546624777cdba53074c97a2b70b78ae771c202
+Author: Øivind <s315695@stud.hioa.no>
+Date:   Sat Oct 27 16:06:26 2018 +0200
+
+    Removed unnecessary lines from toString() method
+
+commit eac356d39544cf4982711f3b99ecb15060bf7b8f
+Author: Øivind <s315695@stud.hioa.no>
+Date:   Sat Oct 27 16:04:24 2018 +0200
+
+    Added omvendtString() method to the ObligSBinTre class
+
+commit b4e04fc030d4d8f501d1cace43cfc16cfb8f3c9a
+Merge: cc4a1ef 1f8e337
+Author: Øivind <s315695@stud.hioa.no>
+Date:   Sat Oct 27 14:48:45 2018 +0200
+
+    Added functionality to the nesteInorden and toString methods
+
+commit 1f8e3374f5461168934a61a295f15217728aff3e
+Author: Øivind <s315695@stud.hioa.no>
+Date:   Sat Oct 27 14:47:47 2018 +0200
+
+    Added functionality to the nesteInorden and toString methods in the ObligSBinTre class
+
+commit cc4a1eff9a2af3f226d62d2b1995cf8aaafa7553
+Merge: b463604 84e78a8
+Author: Øivind <s315695@stud.hioa.no>
+Date:   Sat Oct 27 13:02:36 2018 +0200
+
+    Added functionality to antall(T verdi) method in ObligsBinTre class
+
+commit 84e78a82f81a9b5bb9135f62f41edc558c435878
+Author: Øivind <s315695@stud.hioa.no>
+Date:   Sat Oct 27 13:01:48 2018 +0200
+
+    Added functionality to antall(T verdi) method in ObligsBinTre class
+
+commit b4636044f6d7c1c095d717f4c1c3dbe90ae9e91b
+Merge: 54f4862 1b341d0
+Author: Øivind <s315695@stud.hioa.no>
+Date:   Mon Oct 22 23:56:58 2018 +0200
+
+    Finishes the first task of the third AlgData oblig
+
+commit 1b341d0e907b277994501e45548643c778f5049a
+Author: Øivind <s315695@stud.hioa.no>
+Date:   Mon Oct 22 23:55:09 2018 +0200
+
+    Added functionality to leggInn(T verdi) method in ObligSBinTre class
+
+commit 6db1e1b5b0c21860a74fde4384cb069c1009e4fc
+Author: Øivind <s315695@stud.hioa.no>
+Date:   Mon Oct 22 23:39:38 2018 +0200
+
+    Updated .gitignore to ignore Oblig3.java test file
+
+commit 54f48627805540ec2942065e3d50f3d98d5362fe
+Author: Øivind <s315695@stud.hioa.no>
+Date:   Mon Oct 22 23:22:31 2018 +0200
+
+    Added base structure for the ObligSBinTre class
+
+commit 4b2ff5f158fb7f2bbaa752e2a39b8317b2ee5755
+Author: Øivind <s315695@stud.hioa.no>
+Date:   Mon Oct 22 23:21:45 2018 +0200
+
+    Added .gitignore file
+
+commit a9ed10aad9caddb42a2f2e38cd5fec57780310e6
+Author: Øivind <s315695@stud.hioa.no>
+Date:   Mon Oct 22 14:22:20 2018 +0200
+
+    Initial commit
